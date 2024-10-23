@@ -87,6 +87,32 @@ function Book(author, title, pages, read, genre) {
 function addBookToLibrary() {}
 
 function displayLibrary() {
+  const cardsContainer = document.querySelector(".cards-container");
   for (const book of myLibrary) {
+    const card = createBookMarker(
+      book.author,
+      book.title,
+      book.pages,
+      book.read,
+      book.genre,
+    );
+
+    // ??? lots of question marks
+    cardsContainer.innerHTML += card;
   }
 }
+
+function createBookMarker(author, title, pages, read, genre) {
+  return `<div class="card ${read ? "border-green" : "border-red"}">
+            <h2>${title}</h4>
+            <h4>${author}</h4>
+            <h4>${pages} pages</h4>
+            <h4>${genre}</h4>
+          </div>`;
+}
+
+function main() {
+  displayLibrary();
+}
+
+main();
