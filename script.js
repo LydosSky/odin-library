@@ -74,7 +74,81 @@ const myLibrary = [
     read: false,
     genre: "Adventure",
   },
+
+  {
+    author: "Leo Tolstoy",
+    title: "War and Peace",
+    pages: 1225,
+    read: false,
+    genre: "Historical Fiction",
+  },
+  {
+    author: "Gabriel García Márquez",
+    title: "One Hundred Years of Solitude",
+    pages: 417,
+    read: true,
+    genre: "Magical Realism",
+  },
+  {
+    author: "Charles Dickens",
+    title: "Great Expectations",
+    pages: 505,
+    read: false,
+    genre: "Classic",
+  },
+  {
+    author: "Ernest Hemingway",
+    title: "The Old Man and the Sea",
+    pages: 132,
+    read: true,
+    genre: "Fiction",
+  },
+  {
+    author: "Margaret Atwood",
+    title: "The Handmaid's Tale",
+    pages: 311,
+    read: true,
+    genre: "Dystopian",
+  },
+  {
+    author: "H.G. Wells",
+    title: "The War of the Worlds",
+    pages: 192,
+    read: true,
+    genre: "Science Fiction",
+  },
+  {
+    author: "Khaled Hosseini",
+    title: "The Kite Runner",
+    pages: 372,
+    read: false,
+    genre: "Historical Fiction",
+  },
+  {
+    author: "Douglas Adams",
+    title: "The Hitchhiker's Guide to the Galaxy",
+    pages: 224,
+    read: true,
+    genre: "Science Fiction",
+  },
+  {
+    author: "George R.R. Martin",
+    title: "A Game of Thrones",
+    pages: 694,
+    read: false,
+    genre: "Fantasy",
+  },
+  {
+    author: "Agatha Christie",
+    title: "Murder on the Orient Express",
+    pages: 256,
+    read: true,
+    genre: "Mystery",
+  },
 ];
+
+const form = document.querySelector("#input-form");
+form.addEventListener("submit", addBookToLibrary);
 
 function Book(author, title, pages, read, genre) {
   this.author = author;
@@ -84,17 +158,37 @@ function Book(author, title, pages, read, genre) {
   this.genre = genre;
 }
 
-function addBookToLibrary() {}
+function addBookToLibrary(event) {
+  event.preventDefault();
+
+  const title = document.querySelector("#title");
+  const author = document.querySelector("#author");
+  const pages = document.querySelector("#pages");
+  const read = document.querySelector("#read");
+  const genre = document.querySelector("#genre");
+
+  const book = new Book(
+    author.value,
+    title.value,
+    pages.value,
+    read.value,
+    genre.value,
+  );
+
+  myLibrary.push(book);
+  displayLibrary();
+  form.reset();
+}
 
 function displayLibrary() {
   const cardsContainer = document.querySelector(".cards-container");
   for (const book of myLibrary) {
     const card = createBookMarker(
-      book.author,
-      book.title,
+      book.author.toLowerCase(),
+      book.title.toLowerCase(),
       book.pages,
-      book.read,
-      book.genre,
+      !!book.read,
+      book.genre.toLowerCase(),
     );
 
     // ??? lots of question marks
