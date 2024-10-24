@@ -28,7 +28,7 @@ body {
   justify-items: center;
   align-items: center;
   gap: 2rem;
-  padding: 1rem;
+  padding: 2rem;
   overflow-y: auto;
   height: 85vh;
   box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.75);
@@ -58,12 +58,14 @@ body {
 }
 
 .border-red {
-  border: 2px solid red;
+  border: 1px solid red;
   box-shadow: 0px 0px 16px 4px rgba(0, 0, 0, 0.75);
 }
 
 .border-green {
   border: 1px solid green;
+  background: rgba(0, 0, 0, 0.1);
+  box-shadow: none;
 }
 
 .right-container {
@@ -96,9 +98,14 @@ body {
   display: flex;
   flex-direction: column;
 }
-
+#input-form div select,
 #input-form div input {
   padding: 0.5rem;
+}
+
+#input-form div button {
+  width: 100%;
+  padding: 0.5rem 1rem;
 }
 
 #read-button,
