@@ -22,13 +22,9 @@ body {
   text-align: center;
 }
 
-.right-contaier {
-  grid-column: 10/13;
-}
-
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 3fr));
   justify-items: center;
   align-items: center;
   gap: 2rem;
@@ -44,6 +40,7 @@ body {
 }
 
 .card {
+  position: relative;
   width: 13rem;
   height: 18rem;
   text-align: center;
@@ -66,4 +63,51 @@ body {
 
 .border-green {
   border: 1px solid green;
+}
+
+.right-container {
+  grid-column: 10/13;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#input-form {
+  padding: 2rem;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  width: 20rem;
+  height: 30rem;
+}
+
+#input-form label {
+  display: block;
+  width: 100%;
+}
+
+#input-form div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#input-form div input {
+  padding: 0.5rem;
+}
+
+#delete-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  border: 1px solid black;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
 }

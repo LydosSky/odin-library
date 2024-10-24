@@ -148,6 +148,7 @@ const myLibrary = [
 ];
 
 const form = document.querySelector("#input-form");
+const cardsContainer = document.querySelector(".cards-container");
 form.addEventListener("submit", addBookToLibrary);
 
 function Book(author, title, pages, read, genre) {
@@ -176,37 +177,68 @@ function addBookToLibrary(event) {
   );
 
   myLibrary.push(book);
-  displayLibrary();
   form.reset();
+  displayLibrary();
 }
 
 function displayLibrary() {
-  const cardsContainer = document.querySelector(".cards-container");
-  for (const book of myLibrary) {
+  cardsContainer.textContent = "";
+  for (let idx = 0; idx < myLibrary.length; idx++) {
+    if (myLibrary[idx] === undefined) continue;
     const card = createBookMarker(
-      book.author.toLowerCase(),
-      book.title.toLowerCase(),
-      book.pages,
-      !!book.read,
-      book.genre.toLowerCase(),
+      idx,
+      myLibrary[idx].author.toLowerCase(),
+      myLibrary[idx].title.toLowerCase(),
+      myLibrary[idx].pages,
+      !!myLibrary[idx].read,
+      myLibrary[idx].genre.toLowerCase(),
     );
 
     // ??? lots of question marks
-    cardsContainer.innerHTML += card;
+    cardsContainer.appendChild(card);
   }
 }
 
-function createBookMarker(author, title, pages, read, genre) {
-  return `<div class="card ${read ? "border-green" : "border-red"}">
-            <h2>${title}</h4>
-            <h4>${author}</h4>
-            <h4>${pages} pages</h4>
-            <h4>${genre}</h4>
-          </div>`;
+function createBookMarker(index, author, title, pages, read, genre) {
+  const card = document.createElement("div");
+  card.classList.add(`${read ? "border-green" : "border-red"}`);
+  card.classList.add("card");
+  card.setAttribute("index", index);
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "X";
+  deleteButton.id = "delete-button";
+
+  const titleEl = document.createElement("h2");
+  const authorEl = document.createElement("h4");
+  const pagesEl = document.createElement("h4");
+  const genreEl = document.createElement("h4");
+
+  titleEl.innerText = title;
+  authorEl.innerText = author;
+  pagesEl.innerText = `${pages} pages`;
+  genreEl.innerText = genre;
+
+  card.appendChild(deleteButton);
+  card.appendChild(titleEl);
+  card.appendChild(authorEl);
+  card.appendChild(pagesEl);
+  card.appendChild(genreEl);
+
+  return card;
+}
+
+function deleteBook(event) {
+  const index = event.target.parentElement.getAttribute("index");
+  myLibrary[index] = undefined;
+  cardsContainer.removeChild(event.target.parentElement);
 }
 
 function main() {
   displayLibrary();
+  const deleteButton = document.querySelectorAll("#delete-button");
+  for (let button of deleteButton) {
+    button.addEventListener("click", deleteBook);
+  }
 }
 
 main();
