@@ -197,6 +197,8 @@ function displayLibrary() {
     // ??? lots of question marks
     cardsContainer.appendChild(card);
   }
+
+  addAllEventListener();
 }
 
 function createBookMarker(index, author, title, pages, read, genre) {
@@ -204,9 +206,14 @@ function createBookMarker(index, author, title, pages, read, genre) {
   card.classList.add(`${read ? "border-green" : "border-red"}`);
   card.classList.add("card");
   card.setAttribute("index", index);
+
   const deleteButton = document.createElement("button");
   deleteButton.innerText = "X";
   deleteButton.id = "delete-button";
+
+  const readButton = document.createElement("button");
+  readButton.id = "read-button";
+  readButton.innerText = "R";
 
   const titleEl = document.createElement("h2");
   const authorEl = document.createElement("h4");
@@ -219,6 +226,7 @@ function createBookMarker(index, author, title, pages, read, genre) {
   genreEl.innerText = genre;
 
   card.appendChild(deleteButton);
+  card.appendChild(readButton);
   card.appendChild(titleEl);
   card.appendChild(authorEl);
   card.appendChild(pagesEl);
@@ -233,12 +241,28 @@ function deleteBook(event) {
   cardsContainer.removeChild(event.target.parentElement);
 }
 
-function main() {
+function readBook(event) {
+  const index = event.target.parentElement.getAttribute("index");
+  console.log(index);
+  myLibrary[index].read = !myLibrary[index].read;
   displayLibrary();
-  const deleteButton = document.querySelectorAll("#delete-button");
-  for (let button of deleteButton) {
+}
+
+function addAllEventListener() {
+  const deleteButtons = document.querySelectorAll("#delete-button");
+  for (let button of deleteButtons) {
     button.addEventListener("click", deleteBook);
   }
+
+  const readButtons = document.querySelectorAll("#read-button");
+  for (let button of readButtons) {
+    button.addEventListener("click", readBook);
+  }
+}
+
+function main() {
+  displayLibrary();
+  addAllEventListener();
 }
 
 main();

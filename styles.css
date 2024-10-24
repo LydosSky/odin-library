@@ -58,7 +58,8 @@ body {
 }
 
 .border-red {
-  border: 1px solid red;
+  border: 2px solid red;
+  box-shadow: 0px 0px 16px 4px rgba(0, 0, 0, 0.75);
 }
 
 .border-green {
@@ -100,6 +101,7 @@ body {
   padding: 0.5rem;
 }
 
+#read-button,
 #delete-button {
   position: absolute;
   top: 0.5rem;
@@ -110,4 +112,11 @@ body {
   height: 1.5rem;
   width: 1.5rem;
   border-radius: 50%;
+}
+
+#read-button {
+  right: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
